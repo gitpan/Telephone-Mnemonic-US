@@ -1,0 +1,10 @@
+script/makefile
+MAKEFILE$
+Makefile$
+TODO
+inc/*
+t/save/*
+blib/*
+.swp$
+.old$
+.bak$
