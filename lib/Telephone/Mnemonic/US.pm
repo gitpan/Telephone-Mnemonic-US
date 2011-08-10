@@ -1,3 +1,10 @@
+=head1 NAME
+
+Telephone::Mnemonic::US - Maps US telephone numbers from mnemonic 'easy-to-remember' words to digits, it
+can also attempts the reverse and maps telephone digits to mnemonic words.
+
+=cut
+
 package Telephone::Mnemonic::US;
 
 #use 5.012001;
@@ -14,8 +21,14 @@ use Text::Table;
 use base 'Exporter';
 
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.01';
+our $VERSION   = '0.02';
 
+=pod
+
+=head2 printthem
+ Input: the output of to_words (a href)
+ Output: displays some of the data in a table
+=cut
 
 sub printthem {
 	my ($input, $res) = @_ ;
@@ -30,11 +43,24 @@ sub printthem {
 	$t->load( @data);
 	say $t;
 }
+=pod
+
+=head2 printvalids
+ Helper function for printthem()
+ Input: the hash ref
+ Output: a stings 
+=cut
 sub printvalids {
 	my $h = shift || return '';
 	@$h || return '';
 	join '|', @$h;
 }
+=pod
+
+=head2 to_words
+ Input: a string, like '703-111-2628', and an optional search timeout
+ Output: sorted set of  dictionary words that correspond to the tel number substrings
+=cut
 sub to_words {
     #say "to word";
 	my ($num, $timeout) = @_ ;
@@ -49,6 +75,13 @@ sub to_words {
 	# sort by max segment
 	[sort {	$a->{max_seg} < $b->{max_seg} }  @$res];
 }
+=pod
+
+=head2 to_num
+ Translates a mnemonic tel number to digits
+ Input: an alphanumeric sting, like '(g03) verison'
+ Output: a string like, like '(703) 232 3333'
+=cut
 
 sub to_num {
     my $word = lc shift;
@@ -63,12 +96,8 @@ sub to_num {
 }
 
 1;
-__END__
 
-=head1 NAME
-
-Telephone::Mnemonic::US - Maps US telephone numbers from mnemonic 'easy-to-remember' words to digits, it
-can also attempts the reverse and maps telephone digits to mnemonic words.
+=pod
 
 =head1 SYNOPSIS
 

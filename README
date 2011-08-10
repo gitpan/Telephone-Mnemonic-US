@@ -9,7 +9,7 @@ can also attempts the reverse and maps telephone digits to mnemonic words.
  to_num('ameritrade') ;                => (263) 748 7233 
 
 
-The scripts tel2num.pl and tel_mnemonic.pl are usufull for instant gratification.
+The scripts tel2num.pl and tel2mnemonic.pl are usufull for instant gratification.
 
 NOTE: Only for the case of converting to mnemonics, I assume your system already has a dictionary
 in either /usr/dict/words or /usr/share/dict/words sorted in dictionary order. It should be a
@@ -24,7 +24,7 @@ To install this module type the following:
    make test
    make install
 
-   It will also install two scripts: tel2num.pl and tel_mnemonic.pl
+   It will also install two scripts: tel2num.pl and tel2mnemonic.pl
 
 
 DEPENDENCIES

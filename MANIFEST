@@ -8,8 +8,8 @@ MANIFEST.SKIP
 META.yml
 README
 script/.exrc
+script/tel2mnemonic.pl
 script/tel2num.pl
-script/tel_mnemonic.pl
 t/.exrc
 t/.vimrc
 t/00_load.t
@@ -17,6 +17,7 @@ t/01b_pod.t
 t/01c_coverage.t
 t/02_hasversion.t
 t/03_meta.t
+t/05_minimumversion.t
 t/07_strict.t
 t/10_basic.t
 t/11_tel2num.t
@@ -25,6 +26,8 @@ t/13_beautify.t
 t/14_str_pairs.t
 t/15_to_word.t
 t/16_area_code.t
+t/17_partial_codes.t
 t/20_mnemonic.t
 t/21_combine.t
 t/makefile
+t/META.yml

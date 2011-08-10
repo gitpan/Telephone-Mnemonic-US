@@ -7,7 +7,7 @@ license        'perl'                           ;
 all_from       'lib/Telephone/Mnemonic/US.pm'   ;
 abstract_from  'lib/Telephone/Mnemonic/US.pm'   ;
 install_script 'script/tel2num.pl'              ;
-install_script 'script/tel_mnemonic.pl'         ;
+install_script 'script/tel2mnemonic.pl'         ;
 no_index       'directory'   => 'examples'      ;
 
 requires #'Log::Log4perl'       => '1.06',

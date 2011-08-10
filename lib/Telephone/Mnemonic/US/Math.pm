@@ -1,3 +1,8 @@
+=head1 NAME
+
+Telephone::Mnemonic::US::Math - Helper module that for combinatorics pertaining to mnemonic calcuations
+=cut
+
 package Telephone::Mnemonic::US::Math;
 
 use 5.010000;
@@ -5,13 +10,27 @@ use strict;
 use Data::Dumper;
 use warnings;
 use List::Util 'first';
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use base 'Exporter';
 
 
-our @EXPORT_OK = qw(  combinethem  sets2candidates
-	str_pairs to_word find_valids dict_path
+our @EXPORT_OK = qw(  
+	combinethem  
+    sets2candidates
+	str_pairs str_3sets 
+	to_word 
+	find_valids 
+	dict_path 
 );
+=pod
+
+=head1 FUNCTIONS
+
+=head2 str_paris
+
+ Input: a string of variable length, like "1234"
+ Output: set of substrings, like: '1' '234', '12' '34', '123' '4', '1234' ''
+=cut
 
 sub str_pairs {
 	my $str = shift || return;
@@ -26,6 +45,14 @@ sub str_pairs {
 	}
 	[@pairs];
 }
+=pod
+
+=head2 to_word
+
+ Finds dictionary words that correspond to a number of any length
+ Input: a tel number, a dictionary handler, and the search timeout 
+ Output: a set of dictionary words  
+=cut
 sub to_word {
 	my ($num, $dict, $timeout) = @_ ;
 	$timeout //=0;
@@ -44,9 +71,25 @@ sub to_word {
     #say Dumper @valid; #exit;
     @valid ;
 }
+=pod
+
+=head2 dict_path
+
+ Input: None
+ Output: a string representing the filepath for the system dictionary 
+=cut
 sub dict_path {
 	  first {-f $_} (qw{ /usr/share/dict/words /usr/lib/dict/words});
 }
+=pod
+
+=head2 find_valids
+
+ Finds dictionary words for substrings 
+ Input: a tel number, a dictionary handler, and search timeout 
+ Output: a set of word pairs, with each pair represents a set of valid dictionary 
+        words for it's substrings
+=cut
 sub find_valids {
 	my ($pairs, $dict, $timeout) = @_;
 	return unless @$pairs;
@@ -67,6 +110,14 @@ sub find_valids {
 	}
 	$res;
 }
+=pod
+
+=head2 sets2candidates
+
+ Input: a string like '123'
+ Output: a set of substrings 
+=cut
+
 sub sets2candidates {
 	my $sets = shift;
     my $fragments=[];
@@ -80,7 +131,13 @@ sub sets2candidates {
 	$fragments =  combinethem($_,$fragments) for reverse (@$sets); 
 	$fragments;
 }
+=pod
 
+=head2 str_paris
+
+ Input:
+ Output:
+=cut
 sub combinethem {
 	my ($chars, $fragments) = @_ ;
 	return $chars unless @$fragments ;
@@ -88,12 +145,24 @@ sub combinethem {
 	push @res, @{combine_one($_,$fragments)} for @$chars;
 	[@res];
 }
+=pod
 
+=head2 str_paris
+
+ Input:
+ Output:
+=cut
 sub combine_one {
 	my ($char, $fragments) = @_ ;
 	 [ map { $_=$char . $_}  @{[@$fragments]}  ]
 	
 }
+=pod
+
+=head2 str_paris
+ Input:
+ Output:
+=cut
 
 sub _sets_of_letters {
     my $num = shift ||return;
@@ -119,41 +188,21 @@ sub _sets_of_letters {
     [@letters];
 }
 1;
-__END__
-
-=head1 NAME
-
-Telephone::Mnemonic::US::Math - Perl extension for blah blah blah
+=pod
 
 =head1 SYNOPSIS
 
   use Telephone::Mnemonic::US::Math;
-  blah blah blah
 
 =head1 DESCRIPTION
 
-Stub documentation for Telephone::Mnemonic::US::Math, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
 
-Blah blah blah.
-
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
 
-
 =head1 SEE ALSO
-
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
 
 =head1 AUTHOR
 

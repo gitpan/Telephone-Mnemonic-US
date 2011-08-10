@@ -1,4 +1,18 @@
-package Telephone::Mnemonic::US::Number;
+
+=head1 NAME
+
+Telephone::Mnemonic::US::Number - Helper module that performs basic number manipulations
+
+=head1 SYNOPSIS
+
+  use Telephone::Mnemonic::US::Number;
+
+=head1 DESCRIPTION
+
+
+ This module perfroms format converations on US telephone numbers
+
+=cut
 
 use 5.010000;
 use strict;
@@ -7,47 +21,88 @@ use Data::Dumper;
 #use Scalar::Util 'looks_like_number';
 use Number::Phone::US qw/ is_valid_number /;
 #use List::Util qw/ first /;
-
 use base 'Exporter';
+our $VERSION = '0.02';
 
 our @EXPORT_OK = qw( 
-	well_formed_p 
-	to_tel_digits
-	to_digits
-	area_code
-	station_code
-	house_code
-	without_area_code
-	beautify
-	partial_codes
+	well_formed_p   to_tel_digits  to_digits
+	area_code       station_code   house_code without_area_code
+	beautify        partial_codes
+ _filter_numbers
 );
 
-our $VERSION = '0.01';
+
+=pod
+
+=head1 FUNCTIONS
+
+=head2  partial_codes
+
+ Input: a sting like '(703) 222 3333'
+ Output: a hash with area code, station code, and house code. Returns undef of failure.
+=cut
 
 sub partial_codes {
 	my $num = shift;
 	return unless well_formed_p($num);
-	{ area_code=> area_code($num)||'', 
-	  station_code=> station_code($num)||'', 
-      house_code=> house_code($num)||'' 
+	my $h = { area_code=> area_code($num),
+	          station_code=> station_code($num),
+              house_code=> house_code($num) ,
     };
+    # set default to null string
+	map { $_//=''  } values %$h;
+	$h;
 }
+
+=pod
+
+=head2  area_code
+
+ Input: a sting like '(703) 222 3333'
+ Output: a string like '222 3333', or undef on failure
+=cut
+
 sub area_code {
 	my $num = shift;
 	return unless well_formed_p($num);
 	$num = _filter_numbers($num);
 	($num =~ s/^ (\d{3}) (\d{7}) $/$1/ox )  ? $num : undef
 }
+=pod
+
+=head2  station_code
+
+ Input: a sting like '(703) 222 3333'
+ Output: a string like '222', or undef on failure
+=cut
+
 sub station_code {
 	my $num = shift;
 	$num = without_area_code($num) || return;
 	($num =~ s/ (\d{3}) (\d{4}) $/$1/ox )  ? $num : undef
 }
+=pod
+
+=head2 house_code
+
+ Input: a sting like '(703) 222 3333'
+ Output: a string like '222', or undef on failure
+=cut
+
 sub house_code {
 	my $num = shift;
 	$num = without_area_code($num) || return;
 	($num =~ s/.*(\d{4}) $/$1/ox )  ? $num : undef
 }
+=pod
+
+=head2 without_area_code
+
+ Input: a sting like '(703) 222 3333'
+ Output: a string like '222 3333', or undef on failure
+
+=cut
+
 sub without_area_code {
 	my $num = shift;
 	return unless well_formed_p($num);
@@ -56,14 +111,40 @@ sub without_area_code {
 	$num =~ s/^ (\d{3}) (\d{7}) $/$2/ox  ;
 	$num;
 }
+
+=pod
+
+=head2 well_formed_p
+
+ Input: a sting like '(703) 222 3333'
+ Output: a boolean
+=cut
+
 sub well_formed_p { 
 	&Number::Phone::US::is_valid_number
 }
+
+=pod
+
+=head2 _filter_numbers
+
+ Input: a sting like '(703)-222.3333'
+ Output: a string like '7032223333'
+=cut
+
 sub _filter_numbers {
 	my $num = shift;
     my @nums = $num =~ /(\d+)/g ;	
 	join '',@nums;
 }
+=pod
+
+=head2 to_digits
+
+ Input: a sting like '(703)-222.3333'
+ Output: a string like '7032223333'
+=cut
+
 sub to_digits {
 	my $alphanum = lc shift;
 	my $res;
@@ -83,11 +164,26 @@ sub to_digits {
       }   
 	  $res;
 }
+=pod
+
+=head2 to_tel_digits
+
+ Input: a sting like 've7is6n'
+ Output: a string like '8374766'
+=cut
+
 sub to_tel_digits {
 	my $alphanum = lc shift;
 	my $res = to_digits( $alphanum );
 	well_formed_p($res) ? $res : undef;
 }
+=pod
+
+=head2 beautify
+ Input: a sting like '703-2223333'
+ Output: a string like '(703) 222 3333'
+=cut
+
 sub beautify {
 	my $digits = to_digits(shift) || return;
 	return unless  well_formed_p($digits); 
@@ -96,29 +192,12 @@ sub beautify {
     $digits;
 }
 1;
-__END__
 
-=head1 NAME
 
-Telephone::Mnemonic::US::Number - Perl extension for blah blah blah
 
-=head1 SYNOPSIS
-
-  use Telephone::Mnemonic::US::Number;
-  blah blah blah
-
-=head1 DESCRIPTION
-
-Stub documentation for Telephone::Mnemonic::US::Number, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
-
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
-
 
 
 =head1 SEE ALSO

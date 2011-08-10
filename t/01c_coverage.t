@@ -12,7 +12,13 @@ my $trustme = { trustme => [ 	qr/^.*$/  ,
 
 #pod_coverage_ok( 'Pg::Pcurse' );
 pod_coverage_ok( 'Telephone::Mnemonic::US', { trustme => [ 
-                                qr/^.*$/          , 
+                                qr/^house_code$/         , 
+                                qr/^station_code$/       , 
+                                qr/^area_code$/          , 
+                                qr/^without_area_code$/  , 
+                                qr/^beautify$/           , 
+                                qr/^partial_codes$/      , 
+                                qr/^well_formed_p$/      , 
 			     	qr/^xs_content$/  ,
 ]});
 

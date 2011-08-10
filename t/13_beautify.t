@@ -1,5 +1,4 @@
 use Test::More  'no_plan';
-use List::MoreUtils  qw/ any none/;
 use Telephone::Mnemonic::US::Number qw/ beautify /;
 
 
@@ -16,4 +15,3 @@ TODO: {
 	$TODO = 'some ill formed';
 	ok !  beautify('1 2313');
 }
-

@@ -1,11 +1,12 @@
 
 use Test::More  'no_plan';
 use Telephone::Mnemonic::US::Number qw/ 
-				well_formed_p area_code without_area_code 
-				station_code house_code partial_codes
+				area_code 
+				without_area_code 
+				station_code 
+				house_code 
 /;
 
-*_filter_numbers  = *Telephone::Mnemonic::US::Number::_filter_numbers ;
 #*to_digits  = *Telephone::Mnemonic::US::Number::to_digits;
 
 note 'extractable area codes';
@@ -44,9 +45,3 @@ is house_code( '1235341212'), 1212 ;
 is house_code( '5341212'), 1212;
 ok ! house_code( '1212');
 ok ! house_code( 'aaaa');
-
-note 'partial codes';
-my $h1 = { area_code=>734, station_code=>534, house_code=>1212 };
-is_deeply partial_codes( '(734) 534 1212'), $h1  ;
-my $h2 = { area_code=>'', station_code=>534, house_code=>1212 };
-is_deeply partial_codes( '5341212'), $h2, 

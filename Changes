@@ -1,5 +1,8 @@
 Revision history for Perl extension Telephone::Mnemonic::US.
 
+0.02  Tue Aug  9 12:23:32 2011
+	- Added embeded documentation
+
 0.01  Fri Aug  5 19:03:30 2011
 	- original version; created by h2xs 1.23 with options
 		-AX Telephone::Mnemonic::US
