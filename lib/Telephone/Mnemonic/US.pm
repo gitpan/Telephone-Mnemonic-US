@@ -12,16 +12,17 @@ use strict;
 use warnings;
 use Data::Dumper;
 use Tie::DictFile;
-use Telephone::Mnemonic::US::Math qw/ str_pairs dict_path to_word find_valids /;
 use Telephone::Mnemonic::US::Number qw/ to_tel_digits to_digits beautify/;
+use Telephone::Mnemonic::US::Math qw/ str_pairs dict_path find_valids /;
 use Scalar::Util 'looks_like_number';
 use List::Util qw/ first /;
 use Text::Table;
 
 use base 'Exporter';
 
+use 5.010000;
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.02';
+our $VERSION   = '0.03';
 
 =pod
 

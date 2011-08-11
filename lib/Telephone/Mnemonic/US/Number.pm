@@ -22,7 +22,7 @@ use Data::Dumper;
 use Number::Phone::US qw/ is_valid_number /;
 #use List::Util qw/ first /;
 use base 'Exporter';
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 our @EXPORT_OK = qw( 
 	well_formed_p   to_tel_digits  to_digits

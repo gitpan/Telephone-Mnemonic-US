@@ -10,15 +10,16 @@ use strict;
 use Data::Dumper;
 use warnings;
 use List::Util 'first';
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 use base 'Exporter';
+use Telephone::Mnemonic::US::Number 'to_digits';
 
 
 our @EXPORT_OK = qw(  
 	combinethem  
     sets2candidates
 	str_pairs str_3sets 
-	to_word 
+	seg_words 
 	find_valids 
 	dict_path 
 );
@@ -47,19 +48,19 @@ sub str_pairs {
 }
 =pod
 
-=head2 to_word
+=head2 seg_words
 
  Finds dictionary words that correspond to a number of any length
- Input: a tel number, a dictionary handler, and the search timeout 
+ Input: a tel number or mnemonic, a dictionary handler, and the search timeout 
  Output: a set of dictionary words  
 =cut
-sub to_word {
+sub seg_words {
 	my ($num, $dict, $timeout) = @_ ;
 	$timeout //=0;
-	my $letters = _sets_of_letters( $num ) || return;
+	my $letters = _sets_of_letters( to_digits $num ) || return;
 	my ($candidates, @valid)  ;
+	local $SIG{ALRM} = sub {die};
 	eval {
-		local $SIG{ALRM} = sub {die};
 		alarm $timeout ;
 		$candidates = sets2candidates( $letters ) || return;
 		for (@$candidates) {
@@ -101,8 +102,9 @@ sub find_valids {
 		my $llen =  length($_->[0])||0;
 		my $rlen =  length($_->[1])||0;
         $h->{max_seg} = ($llen > $rlen) ? $llen : $rlen ;
-		$h->{lvalid} = [to_word( $_->[0], $dict, $timeout)];
-		$h->{rvalid} = [to_word( $_->[1], $dict, $timeout)];
+		#TODO rewrite it the 4 lines bellow
+		$h->{lvalid} = [seg_words( $_->[0], $dict, $timeout)];
+		$h->{rvalid} = [seg_words( $_->[1], $dict, $timeout)];
 		$h->{l_nval} = @{$h->{lvalid}};
 		$h->{r_nval} = @{$h->{rvalid}};
 		$h->{max_valid} = ($h->{l_nval} > $h->{r_nval}) ? $h->{l_nval} : $h->{r_nval} ;
@@ -182,7 +184,7 @@ sub _sets_of_letters {
             when ('8')   { push @letters,  [qw/t u v/]   }
             when ('9')   { push @letters,  [qw/w x y z/]  }
             when (/[01]/)   { warn "can't map tel numbers containing 0 or 1\n";return}
-            default:   { warn qq(to_word: "$_" should not happen)}
+            default:   { warn qq(seg_words: "$_" should not happen)}
         }
     }
     [@letters];

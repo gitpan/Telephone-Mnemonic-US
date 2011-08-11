@@ -3,8 +3,9 @@ use Test::More  'no_plan';
 use Telephone::Mnemonic::US::Number qw/ 
 				well_formed_p area_code without_area_code 
 				to_tel_digits beautify
-				_filter_numbers
+_filter_numbers
 /;
+#*_filter_numbers = *Telephone::Mnemonic::US::Number::to_digits ;
 
 
 

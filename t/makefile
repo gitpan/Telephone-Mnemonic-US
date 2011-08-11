@@ -6,26 +6,26 @@
 #  05_minimumversion.t- 07_strict.t
 #  10_basic.t  11_tel2num.t 20_mnemonic.t  21_combine.t
 # 11_phone.t            12_phone.t  13_beautify.t   14_str_pairs.t
-# 15_to_word.t 16_area_code.t  
+# 15_seg_words.t 16_area_code.t  
  
 MODULES  =  -MData::Dumper -MCarp   -M5.010000
-MODULES +=  -MTest::More   -Mblib=../blib
+MODULES +=  -Mblib=../blib  #=MTest::More
 vi =  vi  -pc 'set nofoldenable'
 
 
+current = 01c_coverage.t  
 current = 04_dependencies.t
 current = 05_minimumversion.t
 current = 10_basic.t
 current = 11_tel2num.t
 current = 13_beautify.t
 current = 14_str_pairs.t
-current = 15_to_word.t
+current = 15_seg_words.t
 current = 16_area_code.t
 current = 17_partial_codes.t
 current = 20_mnemonic.t
 current = 21_combine.t
 current = 12_phone.t
-current = 01c_coverage.t  
 
 
 #all: mpod

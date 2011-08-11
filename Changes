@@ -1,5 +1,10 @@
 Revision history for Perl extension Telephone::Mnemonic::US.
 
+0.03  Wed Aug 10 10:20:33 2011
+	- Adjusted tests with multiplatform considerations
+	- Added more coverage tests
+	- Minor fixes
+
 0.02  Tue Aug  9 12:23:32 2011
 	- Added embeded documentation
 
