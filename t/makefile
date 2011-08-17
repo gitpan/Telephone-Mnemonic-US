@@ -4,10 +4,11 @@
 #  00_load.t            01b_pod.t           01c_coverage.t  
 #  02_hasversion.t      03_meta.t           04_dependencies.t-   
 #  05_minimumversion.t- 07_strict.t
-#  10_basic.t  11_tel2num.t 20_mnemonic.t  21_combine.t
-# 11_phone.t            12_phone.t  13_beautify.t   14_str_pairs.t
-# 15_seg_words.t 16_area_code.t  
+#  10_basic.t  11_tel2num.t 20_mnemonic.t   21_combine.t
+#  111_rel2num.t        12_tel_func.t       13_beautify.t   14_str_pairs.t
+#  15_seg_words.t       16_area_code.t  
  
+bpath = ../blib/lib/Telephone/Mnemonics/
 MODULES  =  -MData::Dumper -MCarp   -M5.010000
 MODULES +=  -Mblib=../blib  #=MTest::More
 vi =  vi  -pc 'set nofoldenable'
@@ -26,6 +27,8 @@ current = 17_partial_codes.t
 current = 20_mnemonic.t
 current = 21_combine.t
 current = 12_phone.t
+current = 30_phone.t
+current = 31_instance.t
 
 
 #all: mpod
@@ -34,7 +37,7 @@ all: $(current)
 tel2num tel_mnemonic:
 	perl -Mblib=../blib/lib  ../script/$@.pl $(if $(findstring tel2num,$@),ameritrade,2628)
 
-2* 1* 0*:
+3* 2* 1* 0*:
 	perl -w -Mstrict -Mblib  $(MODULES)   $@  
 pod:
 	PAGER="less" perldoc  ../blib/lib/Telephone/Mnemonic/US.pm
@@ -43,7 +46,7 @@ npod:
 mpod:
 	PAGER="less" perldoc  ../blib/lib/Telephone/Mnemonic/US/Math.pm
 cp:
-	cp  ../blib/lib/Telephone/Mnemonic/US.pm    ../lib/Telephone/Mnemonic/
+	cp  ../blib/lib/Telephone/Mnemonic/*.pm     ../lib/Telephone/Mnemonic/
 	cp  ../blib/lib/Telephone/Mnemonic/US/*.pm  ../lib/Telephone/Mnemonic/US/
 w: 
 	chmod -R u+w  ../blib/lib/Telephone
@@ -53,6 +56,11 @@ vip :  w
 	$(vi) +/NAME ../blib/lib/Telephone/Mnemonic/US.pm  
 t2n t2m :  w
 	$(vi) ../script/tel2num.pl  ../blib/lib/Telephone/Mnemonic/US.pm  
+vphone:  w
+	$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Words.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
+	#$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
+#$(bpath)/US/Phone.pm # $(bpath)/US/Phone.pm   $(bpath)/US/Words.pm
+
 bnum: w
 	PAGER="less" $(vi) -p  $(current) ../blib/lib/Telephone/Mnemonic/US/Number.pm 
 b: w
@@ -67,4 +75,5 @@ math: w
 test:
 	make -C .. test
 help:
-	echo pod vi num b bmath  vipod math test t2n t2m  el2num tel_numeric:
+	echo pod vi num b bmath  vipod math test t2n t2m  el2num tel_numeric vphone
+	echo tel2num tel_mnemonic t2n t2m npod mpod vip t2n atel t2m tel bnum vipod test

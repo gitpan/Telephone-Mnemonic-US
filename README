@@ -30,6 +30,7 @@ To install this module type the following:
 DEPENDENCIES
 
          Data::Dumper
+         Moose
          Carp::Assert
          List::MoreUtils
          List::Util

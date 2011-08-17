@@ -3,8 +3,9 @@ use Test::More  'no_plan';
 use Telephone::Mnemonic::US qw/ to_words /;
 use List::MoreUtils qw/ any /;
 
+can_ok 'Telephone::Mnemonic::US', qw/ to_num to_words /;
+can_ok 'Telephone::Mnemonic::US', qw/ printthem printvalids /;
 
-ok 1;
 #say Dumper to_words('2628');
 #ok  any {$_ eq 'boat'} to_words('2628');
 

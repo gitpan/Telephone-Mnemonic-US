@@ -22,7 +22,7 @@ use base 'Exporter';
 
 use 5.010000;
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.03';
+our $VERSION   = '0.04';
 
 =pod
 

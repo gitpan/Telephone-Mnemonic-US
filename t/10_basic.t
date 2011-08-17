@@ -4,7 +4,7 @@ use Telephone::Mnemonic::US qw/ to_num to_words /;
 
 
 is to_num('amaritrade'), '(262) 748 7233', 'map from mnemonic word';
-ok 1;
+
 
 exit;
 ok any {$_ eq 'boat'}  to_words('2628') ;

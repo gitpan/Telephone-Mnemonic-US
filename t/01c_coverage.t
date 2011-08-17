@@ -1,5 +1,5 @@
 #use Test::More;
-use Test::Pod::Coverage tests=>3;
+use Test::Pod::Coverage tests=>4;
 
 
 my $trustme = { trustme => [ 	  qr/^combine_one$/  
@@ -11,7 +11,10 @@ my $trustme = { trustme => [ 	  qr/^combine_one$/
 pod_coverage_ok( $_, $trustme )        for 
 									    ( 'Telephone::Mnemonic::US::Number'
                                         , 'Telephone::Mnemonic::US::Math'
+                                        , 'Telephone::Mnemonic::US::Words'
                                         , 'Telephone::Mnemonic::US'
+#                                        , 'Telephone::Mnemonic::Phone'
+#                                        , 'Telephone::Mnemonic::US::Phone'
 ) ;
 
 

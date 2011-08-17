@@ -1,7 +1,10 @@
 Changes
+lib/Telephone/Mnemonic/Phone.pm
 lib/Telephone/Mnemonic/US.pm
 lib/Telephone/Mnemonic/US/Math.pm
 lib/Telephone/Mnemonic/US/Number.pm
+lib/Telephone/Mnemonic/US/Phone.pm
+lib/Telephone/Mnemonic/US/Words.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
@@ -21,7 +24,7 @@ t/05_minimumversion.t
 t/07_strict.t
 t/10_basic.t
 t/11_tel2num.t
-t/12_phone.t
+t/12_tel_func.t
 t/13_beautify.t
 t/14_str_pairs.t
 t/15_seg_words.t
@@ -29,5 +32,6 @@ t/16_area_code.t
 t/17_partial_codes.t
 t/20_mnemonic.t
 t/21_combine.t
+t/30_phone.t
 t/makefile
 t/META.yml
