@@ -1,5 +1,8 @@
 Revision history for Perl extension Telephone::Mnemonic::US.
 
+0.05  Thu Aug 18 20:02:35 2011
+	- Added checks and refactored Moose
+
 0.04  Wed Aug 12 10:08:01 2011
 	- Added Moose obj
 	- More tests

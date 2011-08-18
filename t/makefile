@@ -29,6 +29,9 @@ current = 21_combine.t
 current = 12_phone.t
 current = 30_phone.t
 current = 31_instance.t
+current = 32_buildargs.t
+current = 33_role_words.t
+current = 34_role_term.t
 
 
 #all: mpod
@@ -48,6 +51,7 @@ mpod:
 cp:
 	cp  ../blib/lib/Telephone/Mnemonic/*.pm     ../lib/Telephone/Mnemonic/
 	cp  ../blib/lib/Telephone/Mnemonic/US/*.pm  ../lib/Telephone/Mnemonic/US/
+	cp  ../blib/lib/Telephone/Mnemonic/US/Roles/*.pm  ../lib/Telephone/Mnemonic/US/Roles/
 w: 
 	chmod -R u+w  ../blib/lib/Telephone
 vi :  w
@@ -57,8 +61,9 @@ vip :  w
 t2n t2m :  w
 	$(vi) ../script/tel2num.pl  ../blib/lib/Telephone/Mnemonic/US.pm  
 vphone:  w
-	$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Words.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
-	#$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
+	#$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Roles/Words.pm  ../blib/lib/Telephone/Mnemonic/US/Roles/Term.pm
+	#$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Roles/Words.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
+	$(vi) $(current)  ../blib/lib/Telephone/Mnemonic/US/Phone.pm  ../blib/lib/Telephone/Mnemonic/Phone.pm  ../blib/lib/Telephone/Mnemonic/US/Number.pm
 #$(bpath)/US/Phone.pm # $(bpath)/US/Phone.pm   $(bpath)/US/Words.pm
 
 bnum: w

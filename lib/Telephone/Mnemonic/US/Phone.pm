@@ -11,10 +11,12 @@ use 5.010000;
 use Data::Dumper;
 #use Telephone::Mnemonic::US::Number qw/ area_code station_code house_code valid_formed_p beautify /;
 use Telephone::Mnemonic::US::Number();
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 
 use Moose;
+use namespace::autoclean;
 extends 'Telephone::Mnemonic::Phone';
+with    'Telephone::Mnemonic::US::Roles::Words';
 
 use Moose::Util::TypeConstraints;
 subtype 'Tel_Number_US'
@@ -38,17 +40,30 @@ has '+num'      => (is =>'rw' ,
 					#initializer=>'ini' 
 );
 
-sub to_word { };
+around BUILDARGS => sub{
+	my ($func, $self, @args) = @_ ;
+	(1==@args and !ref $_)  ?  $self->$func(num=>@args) : $self->$func(@args);
+};
 
-sub ini { my ($self, $num) = @_ ; } 
-has area_code =>(is=>'rw',lazy=>1,default=>sub{ Telephone::Mnemonic::US::Number::area_code(shift->num)}); 
-has station_code =>(is=>'rw',lazy=>1,default=>sub{ Telephone::Mnemonic::US::Number::station_code(shift->num)}); 
-has house_code =>(is=>'rw',lazy=>1,default=>sub{ Telephone::Mnemonic::US::Number::house_code(shift->num)}); 
+sub BUILD {
+	my $self=shift;
+	my $num = $self->num or warn "num should have been defined";
 
-sub without_area_code { Telephone::Mnemonic::US::Number::without_area_code(shift->num)}
-sub pretty { Telephone::Mnemonic::US::Number::beautify(shift->num)}
+	# mass initializationss
+	my $fun = 'Telephone::Mnemonic::US::Number::';
+    no strict 'refs';
+	$self->$_( &{$fun.$_}($num)||'')  for qw/ without_area_code area_code 
+                                              station_code house_code beautify/;
+	#chek state -- most attrs have been directly set above
+}
 
+
+
+has [qw/ area_code station_code without_area_code house_code beautify/] =>(is=>'rw',isa=>'Str');
+
+__PACKAGE__->meta->make_immutable;
 no Moose;
+no namespace::autoclean;
 1;
 =pod
 
@@ -58,7 +73,7 @@ no Moose;
  
  $tel = new Telephone::Mnemonic::US::Phone num=>'703 111 2222';
  $tel1->area_code;          => '703'
- $tell->pretty;             => '(703) 111 2222'
+ $tell->beautify;           => '(703) 111 2222'
 
 =head1 DESCRIPTION
 

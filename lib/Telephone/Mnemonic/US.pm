@@ -22,7 +22,7 @@ use base 'Exporter';
 
 use 5.010000;
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 
 =pod
 
@@ -30,7 +30,6 @@ our $VERSION   = '0.04';
  Input: the output of to_words (a href)
  Output: displays some of the data in a table
 =cut
-
 sub printthem {
 	my ($input, $res) = @_ ;
 	$res || return;
@@ -56,6 +55,7 @@ sub printvalids {
 	@$h || return '';
 	join '|', @$h;
 }
+
 =pod
 
 =head2 to_words
@@ -83,7 +83,6 @@ sub to_words {
  Input: an alphanumeric sting, like '(g03) verison'
  Output: a string like, like '(703) 232 3333'
 =cut
-
 sub to_num {
     my $word = lc shift;
 	if ($word !~ /[-\.\sa-z]+/ ) {

@@ -8,6 +8,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use Moose;
+use namespace::autoclean;
 
 use 5.010000;
 our $VERSION   = '0.04';
@@ -18,7 +19,11 @@ has 'num'      => (is =>'rw');
 
 
 #sub pretty { confess "you should implement beautify\n" };
+#
 
+no Moose;
+no namespace::autoclean;
+  __PACKAGE__->meta->make_immutable;
 
 1;
 =pod

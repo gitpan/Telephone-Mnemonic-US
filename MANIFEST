@@ -4,7 +4,9 @@ lib/Telephone/Mnemonic/US.pm
 lib/Telephone/Mnemonic/US/Math.pm
 lib/Telephone/Mnemonic/US/Number.pm
 lib/Telephone/Mnemonic/US/Phone.pm
-lib/Telephone/Mnemonic/US/Words.pm
+lib/Telephone/Mnemonic/US/Roles/Term.pm
+lib/Telephone/Mnemonic/US/Roles/Words.pm
+lib/Telephone/Mnemonic/US/US_Phone.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
@@ -33,5 +35,8 @@ t/17_partial_codes.t
 t/20_mnemonic.t
 t/21_combine.t
 t/30_phone.t
+t/31_instance.t
+t/32_buildargs.t
+t/33_role_words.t
 t/makefile
 t/META.yml

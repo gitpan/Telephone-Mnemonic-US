@@ -28,7 +28,6 @@ our @EXPORT_OK = qw(
 	well_formed_p   to_tel_digits  to_digits
 	area_code       station_code   house_code without_area_code
 	beautify        partial_codes
- _filter_numbers
 );
 
 
@@ -192,9 +191,6 @@ sub beautify {
     $digits;
 }
 1;
-
-
-
 =head1 EXPORT
 
 None by default.
