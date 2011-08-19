@@ -11,7 +11,7 @@ use Moose;
 use namespace::autoclean;
 
 use 5.010000;
-our $VERSION   = '0.04';
+our $VERSION   = '0.06';
 
  #requires 'sound';
 
@@ -22,8 +22,7 @@ has 'num'      => (is =>'rw');
 #
 
 no Moose;
-no namespace::autoclean;
-  __PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable;
 
 1;
 =pod

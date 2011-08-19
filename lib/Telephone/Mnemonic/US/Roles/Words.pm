@@ -19,7 +19,7 @@ use Telephone::Mnemonic::US::Math qw/ str_pairs dict_path find_valids /;
 #use List::Util qw/ first /;
 
 use 5.010000;
-our $VERSION = '0.01';
+our $VERSION = '0.06';
 use Moose::Role;
 use namespace::autoclean;
 with    'Telephone::Mnemonic::US::Roles::Term';
@@ -54,7 +54,6 @@ sub to_words {
 	$self->result($res) ;
 }
 no Moose::Role;
-no namespace::autoclean;
 
 1;
 __END__

@@ -8,7 +8,7 @@ use strict;
 use warnings;
 use 5.010000;
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.04';
+our $VERSION   = '0.06';
 use Data::Dumper;
 use Telephone::Mnemonic::US::Number qw/ area_code station_code house_code beautify /;
 

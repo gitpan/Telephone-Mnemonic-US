@@ -9,12 +9,12 @@ use warnings;
 use 5.010000;
 #use MooseX::FollowPBP;
 use Data::Dumper;
-#use Telephone::Mnemonic::US::Number qw/ area_code station_code house_code valid_formed_p beautify /;
-use Telephone::Mnemonic::US::Number();
-our $VERSION   = '0.05';
+use Telephone::Mnemonic::US::Number qw/ well_formed_p to_tel_digits/;
+use namespace::autoclean;
+
+our $VERSION   = '0.06';
 
 use Moose;
-use namespace::autoclean;
 extends 'Telephone::Mnemonic::Phone';
 with    'Telephone::Mnemonic::US::Roles::Words';
 
@@ -22,13 +22,14 @@ use Moose::Util::TypeConstraints;
 subtype 'Tel_Number_US'
 	=> as 'Str'
 	=> where {
-		Telephone::Mnemonic::US::Number::well_formed_p($_);
+		well_formed_p($_);
 };
 
 coerce 'Tel_Number_US'
 	=> from 'Str'
 	=> via {
-		Telephone::Mnemonic::US::Number::to_tel_digits($_) ;
+		#Telephone::Mnemonic::US::Number::to_tel_digits($_) ;
+		to_tel_digits($_) ;
 };
 			
 
@@ -37,7 +38,6 @@ has '+num'      => (is =>'rw' ,
 					required=>1, 
 					lazy=>0, 
 					coerce=>1, 
-					#initializer=>'ini' 
 );
 
 around BUILDARGS => sub{
@@ -61,9 +61,8 @@ sub BUILD {
 
 has [qw/ area_code station_code without_area_code house_code beautify/] =>(is=>'rw',isa=>'Str');
 
-__PACKAGE__->meta->make_immutable;
 no Moose;
-no namespace::autoclean;
+__PACKAGE__->meta->make_immutable;
 1;
 =pod
 

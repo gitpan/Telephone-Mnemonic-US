@@ -1,6 +1,11 @@
 Revision history for Perl extension Telephone::Mnemonic::US.
 
-0.05  Thu Aug 18 20:02:35 2011
+0.06  Thu Aug 18 08:01:15 2011
+	- More checks and refactored Moose
+    - Less symbol leakage
+    - Ready to complete transition to tt2 compatability
+
+0.05  Wed Aug 17 20:02:35 2011
 	- Added checks and refactored Moose
 
 0.04  Wed Aug 12 10:08:01 2011

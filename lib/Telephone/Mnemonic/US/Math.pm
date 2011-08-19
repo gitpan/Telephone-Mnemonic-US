@@ -10,7 +10,7 @@ use strict;
 use Data::Dumper;
 use warnings;
 use List::Util 'first';
-our $VERSION = '0.04';
+our $VERSION = '0.06';
 use base 'Exporter';
 use Telephone::Mnemonic::US::Number 'to_digits';
 

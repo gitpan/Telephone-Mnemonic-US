@@ -15,8 +15,9 @@ use strict;
 use warnings;
 
 use 5.010000;
-our $VERSION = '0.01';
+our $VERSION = '0.06';
 use Moose::Role;
+use namespace::autoclean;
 
 =pod
 
@@ -52,7 +53,6 @@ sub printvalids {
 
 
 no Moose::Role;
-no namespace::autoclean;
 
 1;
 __END__
