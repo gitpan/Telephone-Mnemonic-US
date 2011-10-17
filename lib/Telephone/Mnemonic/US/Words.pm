@@ -1,10 +1,10 @@
 =head1 NAME
 
-Telephone::Mnemonic::US::Roles::Words - Maps US telephone numbers from mnemonic 'easy-to-remember' words to digits, it
+Telephone::Mnemonic::US::Words - Maps US telephone numbers from mnemonic 'easy-to-remember' words to digits, it
 can also attempts the reverse and maps telephone digits to mnemonic words.
 
 =cut
-package Telephone::Mnemonic::US::Roles::Words;
+package Telephone::Mnemonic::US::Words;
 
 #use 5.012001;
 use strict;
@@ -21,15 +21,13 @@ use Telephone::Mnemonic::US::Math qw/ str_pairs dict_path find_valids /;
 use 5.010000;
 our $VERSION = '0.07';
 use Moose::Role;
-use namespace::autoclean;
-with    'Telephone::Mnemonic::US::Roles::Term';
 requires 'num';
 
 #has pairs    => (is=>'rw', isa=>'ArrayRef', lazy=>1, default=>sub{[]} );
 
 has result   => (is=>'rw');
 has dict     => (is=>'rw', isa=>'HashRef', builder=>'dict_io', lazy=>0, predicate=>'dict_p');
-has timeout  => (is=>'rw', isa=>'Num', default=>0 );
+has timeout  => (is=>'rw', isa=>'Num', default=>0);
 
 sub dict_io {
     my %hash;
@@ -53,7 +51,6 @@ sub to_words {
     $res = [sort { $a->{max_seg} < $b->{max_seg} }  @$res];
 	$self->result($res) ;
 }
-no Moose::Role;
 
 1;
 __END__
@@ -72,8 +69,8 @@ __END__
 
 =head1 SYNOPSIS
 
- use Telephone::Mnemonic::US::Roles::Words;
-	with 'Telephone::Mnemonc::US::Roles::Words";
+ use Telephone::Mnemonic::US::Words;
+	with 'Telephone::Mnemonc::US::Words";
 
 =head1 DESCRIPTION
 

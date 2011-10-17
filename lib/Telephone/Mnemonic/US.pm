@@ -22,7 +22,7 @@ use base 'Exporter';
 
 use 5.010000;
 our @EXPORT_OK = qw( to_num to_words printthem);
-our $VERSION   = '0.06';
+our $VERSION   = '0.07';
 
 =pod
 
@@ -117,13 +117,13 @@ gotverison, or got-ver-ison. On success, you receive a string such as '(703) 123
 
 =head2 Converting Digits to Mnemonics
 
-The B<to_words> function converts (a well formated) telephone number to one or more mnemonics.
+The B<to_words> function converts (a well formatted) telephone number to one or more mnemonics.
 Unless you lucky to receive one dictionary word that maps to a 10-digit number, as partial 
 match, you will probably receive several answers, with each answer matching one or two dictionary words.
 If you requested a match for telephone number '(703) 404 2628', some  answers are bound to 
 include the words 'boat', 'coat', and 'anat' as partial match for the last 4 digits.
 An optional parameter can serve as search timeout. On success it returns a hash reference
-containing all possibe answers or partial segments; you could also use the I<printthem> function 
+containing all possible answers or partial segments; you could also use the I<printthem> function 
 to display them.
 
 It understands telephone numbers in many formants; numbers without area code or with mixture of letters and digits are possible but it is best to  stick with the formats supported by Number::Phone .

@@ -11,7 +11,7 @@ use Moose;
 use namespace::autoclean;
 
 use 5.010000;
-our $VERSION   = '0.06';
+our $VERSION   = '0.07';
 
  #requires 'sound';
 

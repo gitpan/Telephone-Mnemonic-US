@@ -1,6 +1,6 @@
 =head1 NAME
 
-Telephone::Mnemonic::US::Math - Helper module that for combinatorics pertaining to mnemonic calcuations
+Telephone::Mnemonic::US::Math - Helper module that for combinatorics pertaining to mnemonic calculations
 =cut
 
 package Telephone::Mnemonic::US::Math;
@@ -10,7 +10,7 @@ use strict;
 use Data::Dumper;
 use warnings;
 use List::Util 'first';
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 use base 'Exporter';
 use Telephone::Mnemonic::US::Number 'to_digits';
 

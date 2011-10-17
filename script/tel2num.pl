@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+# Copyright (C) 2011, Ioannis
 use strict; use warnings;
 use 5.010000;
 use Scalar::Util qw/ looks_like_number /;
@@ -7,14 +8,15 @@ use Data::Dumper;
 use Telephone::Mnemonic::US qw/ to_num to_words printthem/ ;
 use Tie::DictFile;
 
+our $VERSION = '0.26';
 
-
-my $o = (new Getopt::Compact modes  => [qw( debug )],
+my $o = (new Getopt::Compact modes  => [qw( debug version)],
 	                         args   => 'number | word',
 	                         struct => [ [ [qw(t timeout)], 'timeout',],
 			])-> opts;
 
 # Options
+$o->{version} and print "$VERSION\n" and exit ;
 my $timeout = $o->{timeout} || 0;
 my $input = shift || die "Usage: $0 -h";
 #'202-468-8442';

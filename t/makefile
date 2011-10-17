@@ -13,9 +13,8 @@ MODULES  =  -MData::Dumper -MCarp   -M5.010000
 MODULES +=  -Mblib=../blib  #=MTest::More
 vi =  vi  -pc 'set nofoldenable'
 
-
+current = 01b_pod.t
 current = 01c_coverage.t  
-current = 04_dependencies.t
 current = 05_minimumversion.t
 current = 10_basic.t
 current = 11_tel2num.t
@@ -30,8 +29,13 @@ current = 21_combine.t
 current = 30_phone.t
 current = 31_instance.t
 current = 32_buildargs.t
-current = 34_role_term.t
 current = 33_role_words.t
+current = 34_role_term.t
+current = 01s_spelling.t
+current = 04_dependencies.t
+current = 08_scripts.t
+current = 09_legal.t
+current = 50_script_pl.t
 
 
 #all: mpod
@@ -40,10 +44,12 @@ all: $(current)
 tel2num tel_mnemonic:
 	perl -Mblib=../blib/lib  ../script/$@.pl $(if $(findstring tel2num,$@),ameritrade,2628)
 
-3* 2* 1* 0*:
+5* 3* 2* 1* 0*:
 	perl -w -Mstrict -Mblib  $(MODULES)   $@  
 pod:
 	PAGER="less" perldoc  ../blib/lib/Telephone/Mnemonic/US.pm
+spell:
+	$(vi) 06_spelling.t  ../blib/lib/Telephone/Mnemonic/US.pm
 npod:
 	PAGER="less" perldoc  ../blib/lib/Telephone/Mnemonic/US/Number.pm
 mpod:

@@ -5,14 +5,14 @@ use inc::Module::Install;
 name           'Telephone-Mnemonic-US'          ;
 license        'perl'                           ;
 all_from       'lib/Telephone/Mnemonic/US.pm'   ;
-abstract_from  'lib/Telephone/Mnemonic/US.pm'   ;
 install_script 'script/tel2num.pl'              ;
 install_script 'script/tel2mnemonic.pl'         ;
 no_index       'directory'   => 'examples'      ;
+#author         'Ioannis Tambouras <ioannis@cpan.org>';
 
 requires #'Log::Log4perl'       => '1.06',
-	     'Data::Dumper'        => '2.131',
-	     'Carp::Assert'        => '0.20',
+	     #'Data::Dumper'        => '2.131',
+#	     'Carp::Assert'        => '0.20',
 	     'Getopt::Compact'     => '0.04',
 	     'Moose'               => '2.0007',
 	     'List::MoreUtils'     => '0.32',
@@ -30,6 +30,8 @@ test_requires 'Test::Pod::Coverage' => '1.08',
               'Test::Dependencies'  => '0.12',
               'Test::MinimumVersion'=> '0.101080',
               'Test::Strict'        => '0.14', 
+              'Test::Spelling'      => '0.15',
+              'Expect'              => '1.21',
 ;
 auto_install;
 WriteAll;

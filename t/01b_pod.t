@@ -2,22 +2,14 @@ use Test::More;
 
 
 my $dir  = $ENV{PWD} =~ m#\/t$#  ? '../' : '';
-my @files =   (    "${dir}blib/lib/Telephone/Mnemonic/US.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/US/Math.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/US/Number.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/US/Roles/Words.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/US/Roles/Term.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/Phone.pm" ,
-                   "${dir}blib/lib/Telephone/Mnemonic/US/Phone.pm" ,
-		   "${dir}script/tel2num.pl", "${dir}script/tel2mnemonic.pl" ,
-);
-plan  tests=> scalar @files;
 
 eval 'use Test::Pod' ;
 
 
 SKIP: {        
-		skip  'no Test::Pod', scalar @files    if $@ ;
-		pod_file_ok( $_,  $_)   for @files;
+		skip  'no Test::Pod', scalar 1    if $@ ;
+	    my @files =   all_pod_files( "${dir}blib" );
+		pod_file_ok( $_, )   for @files;
+		done_testing( scalar @files);
 };
 

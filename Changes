@@ -1,5 +1,9 @@
 Revision history for Perl extension Telephone::Mnemonic::US.
 
+0.07  Sat Aug 27 09:11:14 2011
+	- Checked pod spelling
+	- Added expect tests for scripts
+
 0.06  Thu Aug 18 08:01:15 2011
 	- More checks and refactored Moose
     - Less symbol leakage

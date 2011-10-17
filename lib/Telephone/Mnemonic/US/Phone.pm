@@ -12,7 +12,7 @@ use Data::Dumper;
 use Telephone::Mnemonic::US::Number qw/ well_formed_p to_tel_digits/;
 use namespace::autoclean;
 
-our $VERSION   = '0.06';
+our $VERSION   = '0.07';
 
 use Moose;
 extends 'Telephone::Mnemonic::Phone';
